@@ -1,5 +1,9 @@
 # Deploying a Flask API and MySQL server on Kubernetes
 
+1.Code URL : https://github.com/dharmeshn007/flaskapi-k8s-project.git
+2.Docker Hub URL : https://hub.docker.com/repository/docker/dharmesh007/flask-api/general
+
+
 This repo contains code that 
 1) Deploys a MySQL server on a Kubernetes cluster
 2) Attaches a persistent volume to it, so the data remains contained if pods are restarting
@@ -11,25 +15,7 @@ This repo contains code that
 ## Getting started
 1. Clone the repository
 2. Configure `Docker` to use the `Docker daemon` in your kubernetes cluster via your terminal: `eval $(minikube docker-env)`
-3. Pull the latest mysql image from `Dockerhub`: `Docker pull mysql`
-4. Build a kubernetes-api image with the Dockerfile in this repo: `Docker build . -t flask-api`
-
-## Secrets
-`Kubernetes Secrets` can store and manage sensitive information. For this example we will define a password for the
-`root` user of the `MySQL` server using the `Opaque` secret type. For more info: https://kubernetes.io/docs/concepts/configuration/secret/
-
-1. Encode your password in your terminal: `echo -n super-secret-passwod | base64`
-2. Add the output to the `flakapi-secrets.yml` file at the `db_root_password` field
-
-## Deployments
-Get the secrets, persistent volume in place and apply the deployments for the `MySQL` database and `Flask API`
-
-1. Add the secrets to your `kubernetes cluster`: `kubectl apply -f flaskapi-secrets.yml`
-2. Create the `persistent volume` and `persistent volume claim` for the database: `kubectl apply -f mysql-pv.yml`
-3. Create the `MySQL` deployment: `kubectl apply -f mysql-deployment.yml`
-4. Create the `Flask API` deployment: `kubectl apply -f flaskapp-deployment.yml`
-
-You can check the status of the pods, services and deployments.
+3. Build a kubernetes-api image with the Dockerfile in this repo: `Docker build . -t flask-api`
 
 ## Creating database and schema
 The API can only be used if the proper database and schemas are set. This can be done via the terminal.
